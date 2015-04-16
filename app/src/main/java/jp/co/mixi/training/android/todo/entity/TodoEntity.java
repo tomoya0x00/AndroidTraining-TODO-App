@@ -15,6 +15,15 @@ public class TodoEntity implements BaseColumns {
     public static final String COLUMN_NAME_TODO_TITLE = "title";
 
     private String title;
+    private long id;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
