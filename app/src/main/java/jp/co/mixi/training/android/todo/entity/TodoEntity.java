@@ -1,5 +1,7 @@
 package jp.co.mixi.training.android.todo.entity;
 
+import android.provider.BaseColumns;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -7,8 +9,11 @@ import com.google.gson.GsonBuilder;
  * TODOを表現するためのEntity
  * Created by Hideyuki.Kikuma on 2015/03/15.
  */
-public class TodoEntity {
+public class TodoEntity implements BaseColumns {
     private static final Gson GSON = new GsonBuilder().create();
+    public static final String TODO_TABLE_NAME = "todo";
+    public static final String COLUMN_NAME_TODO_TITLE = "title";
+
     private String title;
 
     public String getTitle() {
