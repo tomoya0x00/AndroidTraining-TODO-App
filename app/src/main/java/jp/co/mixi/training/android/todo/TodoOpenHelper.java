@@ -66,6 +66,26 @@ public class TodoOpenHelper extends SQLiteOpenHelper {
         }
     }
 
+    public long updateTodo(TodoEntity todo) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        try {
+            String selection = BaseColumns._ID + " = ?";
+            String[] selectionArgs = {
+                    String.valueOf(todo.getId())
+            };
+            Date date = new Date();
+            ContentValues values = new ContentValues();
+            values.put(TodoEntity.COLUMN_NAME_TODO_TITLE, todo.getTitle());
+            values.put(COMMON_COLUMN_NAME_UPDATE_AT, date.getTime());
+            int count = db.update(TodoEntity.TODO_TABLE_NAME, values, selection, selectionArgs);
+            db.setTransactionSuccessful();
+            return count;
+        } finally {
+            db.endTransaction();
+        }
+    }
+
     public List<TodoEntity> loadTodoAll() {
         SQLiteDatabase db = getReadableDatabase();
 
