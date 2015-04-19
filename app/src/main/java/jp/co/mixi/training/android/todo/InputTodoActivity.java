@@ -1,6 +1,7 @@
 package jp.co.mixi.training.android.todo;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -19,11 +20,25 @@ public class InputTodoActivity extends ActionBarActivity {
         setContentView(R.layout.activity_input_todo);
         View submitButton = findViewById(R.id.submit);
         final EditText todoText = (EditText) findViewById(R.id.input_todo);
+        Intent received = getIntent();
+        final long entityId;
+        long paramEntryId = 0;
+        if (received != null) {
+            String extra = received.getStringExtra("todo");
+            if (extra != null) {
+                TodoEntity entity = TodoEntity.fromJson(extra);
+                todoText.setText(entity.getTitle());
+                paramEntryId = entity.getId();
+            }
+        }
+        entityId = paramEntryId;
+
         submitButton.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
                                                 TodoEntity entity = new TodoEntity();
                                                 entity.setTitle(todoText.getText().toString());
+                                                entity.setId(entityId);
                                                 Activity activity = InputTodoActivity.this;
                                                 TodoSaveService.startActionSave(activity, entity);
                                                 activity.finish();

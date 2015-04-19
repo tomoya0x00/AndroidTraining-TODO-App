@@ -95,10 +95,10 @@ public class MainActivity extends ActionBarActivity {
             super.onStart();
 
             List<TodoEntity> list = loadTodo();
-            ListView listView = (ListView) getActivity().findViewById(R.id.todoList);
+            final ListView listView = (ListView) getActivity().findViewById(R.id.todoList);
             todoListItemAdapter = new TodoListItemAdapter(getActivity(), list);
             listView.setAdapter(todoListItemAdapter);
-            View addTodo = getActivity().findViewById(R.id.add_todo);
+           View addTodo = getActivity().findViewById(R.id.add_todo);
             addTodo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -21,7 +21,7 @@ public class TodoOpenHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "Todo.db";
 
-    private static final String COMMON_COLUMN_NAME_CREATE_AT = "craete_at";
+    private static final String COMMON_COLUMN_NAME_CREATE_AT = "create_at";
     private static final String COMMON_COLUMN_NAME_UPDATE_AT = "update_at";
 
     private static final String TODO_TABLE_CREATE =
@@ -119,5 +119,12 @@ public class TodoOpenHelper extends SQLiteOpenHelper {
         }
 
         return list;
+    }
+
+    public boolean isExist(TodoEntity entity) {
+        if (entity.getId() != 0) {
+            return true;
+        }
+        return false;
     }
 }
